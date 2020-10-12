@@ -2,55 +2,55 @@
     "doc": "01-typosquatting",
     "title": "01-typosquatting",
     "content": "Git repo: https://github.com/XP1000/01-typosquatting . See Rubygems for setup . For security reason we need to prevent typosquatting (on rubygems.org) when adding a new source for gems. The way this will be handled is similar to what is already done when using non https url: . gem source -a \"http://rubygems.org\" https://rubygems.org is recommended for security over http://rubygems.org Do you want to add this insecure source? [yn] . Hint 1 Read the definition of typosquatting: https://en.wikipedia.org/wiki/Typosquatting . Hint 2 Learn about the Levenshtein distance: https://en.wikipedia.org/wiki/Levenshtein_distance . Hint 3 Search for the current implementation of the https check with . ack --ruby \"check.*https\" . def check_rubygems_https(source) # :nodoc: uri = source.uri if uri.scheme and uri.scheme.downcase == 'http' and uri.host.downcase == 'rubygems.org' question = &lt;&lt;-QUESTION.chomp https://rubygems.org is recommended for security over #{uri} Do you want to add this insecure source? QUESTION terminate_interaction 1 unless ask_yes_no question end end . Hint 4 Check for an already existing leveinshtein implementation . ack --ruby \"levenshtein\" . Hint 5 Add a new test in test/rubygems/test_gem_commands_sources_command.rb . ",
-    "url": "http://localhost:4000/docs/tasks/01-typosquatting.html",
+    "url": "/docs/tasks/01-typosquatting.html",
     "relUrl": "/docs/tasks/01-typosquatting.html"
   },"1": {
     "doc": "02-dependency-update",
     "title": "02-dependency-update",
     "content": "Git repo: https://github.com/XP1000/02-dependency-update . See BitMidi for setup . We have received the following report to update the uuid dependency: https://github.com/XP1000/02-dependency-update/pull/8 . Check if it is safe to merge . Hint 1 Read the changelog of the uuid package: https://github.com/uuidjs/uuid/blob/master/CHANGELOG.md . Hint 2 Rewrite the uuid import to comply with the new default export . Hint 3 Notice that the code using uuids isn’t used anymore and carrefully remove the uuid dependency . ",
-    "url": "http://localhost:4000/docs/tasks/02-dependency-update.html",
+    "url": "/docs/tasks/02-dependency-update.html",
     "relUrl": "/docs/tasks/02-dependency-update.html"
   },"2": {
     "doc": "03-gravatar",
     "title": "03-gravatar",
     "content": "Git repo: https://github.com/XP1000/03-gravatar . See Astuto for setup . We want to be able to see the gravatar of the comment authors in the posts comments: . Hint 1 Check the react-gravatar package: https://www.npmjs.com/package/react-gravatar . Hint 2 Return the author email from the SQL query: app/controllers/comments_controller.rb:8 And render it in the json: app/controllers/comments_controller.rb:25 . Hint 3 Edit the Comment component to take the author email into consideration and display the Gravtar component inside it . Hint 4 Add some CSS rules for a nice integration in app/javascript/stylesheets/components/Comments.scss . ",
-    "url": "http://localhost:4000/docs/tasks/03-gravatar.html",
+    "url": "/docs/tasks/03-gravatar.html",
     "relUrl": "/docs/tasks/03-gravatar.html"
   },"3": {
     "doc": "Astuto",
     "title": "Astuto",
     "content": "Setup the code: . git clone $REPO_URL cd $REPO_DIR cp .env-example .env . Setup dependencies and start web server: . script/docker-update-and-run.sh . ",
-    "url": "http://localhost:4000/docs/projects/astuto.html",
+    "url": "/docs/projects/astuto.html",
     "relUrl": "/docs/projects/astuto.html"
   },"4": {
     "doc": "BitMidi",
     "title": "BitMidi",
     "content": "Setup the code: . git clone $REPO_URL cd $REPO_DIR cp secret/index-sample.js secret/index.js . Edit secret/index.js . export const db = { client: 'mysql', version: '5.7', connection: { host: isProd ? 'TODO' : 'localhost', port: 3306, - user: 'TODO', + user: 'bitmidi', - password: 'TODO', + password: 'bitmidi', - database: 'TODO' + database: 'bitmidi' }, migrations: { directory: '../migrations' } } . Setup dependencies: . npm install npm run build . Setup mysql . docker run --name bitmidi-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=bitmidi -e MYSQL_USER=bitmidi -e MYSQL_PASSWORD=bitmidi -p 3306:3306 bitnami/mysql:5.7 . Get test data: . npm run knex -- migrate:latest curl http://www.jsbach.net/midi/sankey/802-805.zip --output /tmp/sample.zip unzip /tmp/sample.zip -d /tmp/midi-samples node -r @babel/register tools/import.js /tmp/midi-samples . Start web server: . npm start . ",
-    "url": "http://localhost:4000/docs/projects/bitmidi.html",
+    "url": "/docs/projects/bitmidi.html",
     "relUrl": "/docs/projects/bitmidi.html"
   },"5": {
     "doc": "Projects",
     "title": "Projects",
     "content": " ",
-    "url": "http://localhost:4000/docs/projects/",
+    "url": "/docs/projects/",
     "relUrl": "/docs/projects/"
   },"6": {
     "doc": "Tasks",
     "title": "Tasks",
     "content": " ",
-    "url": "http://localhost:4000/docs/tasks/",
+    "url": "/docs/tasks/",
     "relUrl": "/docs/tasks/"
   },"7": {
     "doc": "Rubygems",
     "title": "Rubygems",
     "content": "Setup the code: . git clone $REPO_URL cd $REPO_DIR git submodule update --init . Change your system version with the one from the repo: . gem --version # know your current version ruby setup.rb gem --version # ensure you are using the latest version from the code . ",
-    "url": "http://localhost:4000/docs/projects/rubygems.html",
+    "url": "/docs/projects/rubygems.html",
     "relUrl": "/docs/projects/rubygems.html"
   },"8": {
     "doc": "Rubygems.org",
     "title": "Rubygems.org",
     "content": "Setup the code: . git clone $REPO_URL cd $REPO_DIR . Setup services (elasticsearch / postgres / memcache) . docker-compose up . Setup dependencies: . bundle install ./script/setup bundle exec rake db:reset db:test:prepare --trace bundle exec rake environment elasticsearch:import:all DIR=app/models FORCE=y . Get test data: ./script/load-pg-dump -d rubygems_development -h localhost -c /tmp/dump . Start web server: . bundle exec rails s . ",
-    "url": "http://localhost:4000/docs/projects/rubygemsorg.html",
+    "url": "/docs/projects/rubygemsorg.html",
     "relUrl": "/docs/projects/rubygemsorg.html"
   }
 }

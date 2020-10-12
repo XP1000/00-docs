@@ -1,7 +1,0 @@
-title: XP1000
-email: yoann.lecuyer+xp1000@gmail.com
-description: XP1000
-remote_theme: pmarsceill/just-the-docs
-search_enabled: true
-plugins:
-  - jekyll-remote-theme
